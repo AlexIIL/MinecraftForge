@@ -38,7 +38,7 @@ public class TrackPath2DArc implements ITrackPath {
 
         // WARNING: MATHS!
 
-        // (A differencial equation for the above function)
+        // (A differential equation for the above function)
 
         float o = (float) position;
         float sa = (float) angleStart;

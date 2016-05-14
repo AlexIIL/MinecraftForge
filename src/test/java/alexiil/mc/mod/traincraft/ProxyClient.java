@@ -141,7 +141,7 @@ public class ProxyClient extends Proxy {
     }
 
     private static void renderFakeTrackBlock(RenderWorldLastEvent event) {
-        if (Minecraft.getMinecraft().getRenderManager().pointedEntity == null) return;
+        if (Minecraft.getMinecraft().getRenderManager().livingPlayer == null) return;
 
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
         if (player.getHeldItemMainhand() == null || player.getHeldItemMainhand().stackSize == 0) return;
