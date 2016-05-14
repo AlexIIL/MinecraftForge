@@ -104,7 +104,7 @@ public abstract class BehaviourVanillaNative extends TrackBehaviourNative {
         public static final Normal INSTANCE = new Normal();
 
         private Normal() {
-            super((BlockRailBase) Blocks.RAIL, "normal");
+            super((BlockRailBase) Blocks.rail, "normal");
         }
 
         @Override
@@ -120,7 +120,7 @@ public abstract class BehaviourVanillaNative extends TrackBehaviourNative {
         public static final Activator INSTANCE = new Activator();
 
         private Activator() {
-            super((BlockRailBase) Blocks.ACTIVATOR_RAIL, "activator");
+            super((BlockRailBase) Blocks.activator_rail, "activator");
         }
 
         @Override
@@ -136,7 +136,7 @@ public abstract class BehaviourVanillaNative extends TrackBehaviourNative {
         public static final Detector INSTANCE = new Detector();
 
         private Detector() {
-            super((BlockRailBase) Blocks.DETECTOR_RAIL, "detector");
+            super((BlockRailBase) Blocks.detector_rail, "detector");
         }
 
         @Override
@@ -152,7 +152,7 @@ public abstract class BehaviourVanillaNative extends TrackBehaviourNative {
         public static final Golden INSTANCE = new Golden();
 
         private Golden() {
-            super((BlockRailBase) Blocks.GOLDEN_RAIL, "golden");
+            super((BlockRailBase) Blocks.golden_rail, "golden");
         }
 
         @Override

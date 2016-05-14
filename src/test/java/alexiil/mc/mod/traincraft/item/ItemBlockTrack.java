@@ -51,7 +51,7 @@ public abstract class ItemBlockTrack extends ItemBlockTrainCraft {
             IBlockState iblockstate1 = this.block.onBlockPlaced(world, pos, side, hitX, hitY, hitZ, i, player);
 
             if (placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, iblockstate1)) {
-                SoundType soundtype = this.block.getSoundType();
+                SoundType soundtype = this.block.getStepSound();
                 world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                 --stack.stackSize;
             }

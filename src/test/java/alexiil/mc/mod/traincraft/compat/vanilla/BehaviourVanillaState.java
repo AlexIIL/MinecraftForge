@@ -148,7 +148,7 @@ public abstract class BehaviourVanillaState extends TrackBehaviourStateful {
 
     public static class Normal extends BehaviourVanillaState {
         public Normal(String name, World world, BlockPos pos) {
-            super(name, (BlockRailBase) Blocks.RAIL, world, pos);
+            super(name, (BlockRailBase) Blocks.rail, world, pos);
         }
 
         @Override
@@ -194,7 +194,7 @@ public abstract class BehaviourVanillaState extends TrackBehaviourStateful {
 
     public static class Activator extends Redstone {
         public Activator(String name, World world, BlockPos pos) {
-            super(name, (BlockRailPowered) Blocks.ACTIVATOR_RAIL, world, pos);
+            super(name, (BlockRailPowered) Blocks.activator_rail, world, pos);
         }
 
         @Override
@@ -212,7 +212,7 @@ public abstract class BehaviourVanillaState extends TrackBehaviourStateful {
 
     public static class Detector extends Redstone {
         public Detector(String name, World world, BlockPos pos) {
-            super(name, (BlockRailDetector) Blocks.DETECTOR_RAIL, world, pos);
+            super(name, (BlockRailDetector) Blocks.detector_rail, world, pos);
         }
 
         @Override
@@ -230,7 +230,7 @@ public abstract class BehaviourVanillaState extends TrackBehaviourStateful {
 
     public static class Golden extends Redstone {
         public Golden(String name, World world, BlockPos pos) {
-            super(name, (BlockRailPowered) Blocks.GOLDEN_RAIL, world, pos);
+            super(name, (BlockRailPowered) Blocks.golden_rail, world, pos);
         }
 
         @Override

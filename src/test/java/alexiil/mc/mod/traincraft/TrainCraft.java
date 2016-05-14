@@ -21,7 +21,7 @@ import alexiil.mc.mod.traincraft.track.TCTracks;
 
 @Mod(modid = DefaultProps.MODID, name = "TrainCraft")
 public class TrainCraft {
-    @Instance
+    @Instance(DefaultProps.MODID)
     public static TrainCraft instance;
 
     public static Logger trainCraftLog;
