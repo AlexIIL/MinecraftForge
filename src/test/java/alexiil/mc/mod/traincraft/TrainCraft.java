@@ -3,6 +3,7 @@ package alexiil.mc.mod.traincraft;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.alexiil.tmp.MinecartHooks;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import alexiil.mc.mod.traincraft._tmp.forge.MinecartHooksImpl;
 import alexiil.mc.mod.traincraft.api.AddonManager;
 import alexiil.mc.mod.traincraft.api.TrainCraftAPI;
 import alexiil.mc.mod.traincraft.block.TCBlocks;
@@ -55,6 +57,8 @@ public class TrainCraft {
         MessageHandler.INSTANCE.preInit();
 
         MinecraftForge.EVENT_BUS.register(CartCompat.INSTANCE);
+        
+        MinecartHooks.HOOK = MinecartHooksImpl.INSTANCE;
     }
 
     @EventHandler
