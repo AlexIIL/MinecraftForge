@@ -47,6 +47,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.item.EntityMinecartContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -112,6 +113,9 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
+import net.minecraftforge.event.entity.minecart.MinecartEvent;
+import net.minecraftforge.event.entity.minecart.MinecartFindRailEvent;
+import net.minecraftforge.event.entity.minecart.MinecartGetPosEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -1146,5 +1150,22 @@ public class ForgeHooks
     public static boolean onThrowableImpact(EntityThrowable throwable, RayTraceResult ray)
     {
         return MinecraftForge.EVENT_BUS.post(new ThrowableImpactEvent(throwable, ray));
+    }
+
+    public static boolean onMinecartUpdateShouldCancel(EntityMinecart minecart)
+    {
+        return MinecraftForge.EVENT_BUS.post(new MinecartFindRailEvent(minecart));
+    }
+
+    public static Vec3d onMinecartGetPos(EntityMinecart minecart, double x, double y, double z)
+    {
+        return onMinecartGetPosOffset(minecart, x, y, z, 0);
+    }
+
+    public static Vec3d onMinecartGetPosOffset(EntityMinecart minecart, double x, double y, double z, double offset)
+    {
+        MinecartGetPosEvent event = new MinecartGetPosEvent(minecart, x, y, z, offset);
+        MinecraftForge.EVENT_BUS.post(event);
+        return event.getPos();
     }
 }
