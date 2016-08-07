@@ -48,7 +48,7 @@
              IBlockState iblockstate = this.field_70170_p.func_180495_p(blockpos);
  
 -            if (BlockRailBase.func_176563_d(iblockstate))
-+            if (net.minecraftforge.common.ForgeHooks.onMinecartUpdateShouldCancel(this)); else // Forge: do nothing and cancel the main position update
++            if (canUseRail() && net.minecraftforge.common.ForgeHooks.onMinecartUpdateShouldCancel(this)); else // Forge: do nothing and cancel the main position update
 +            if (canUseRail() && BlockRailBase.func_176563_d(iblockstate))
              {
                  this.func_180460_a(blockpos, iblockstate);
