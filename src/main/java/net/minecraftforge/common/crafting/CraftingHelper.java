@@ -83,7 +83,7 @@ public class CraftingHelper {
     private static Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private static Map<ResourceLocation, IConditionFactory> conditions = Maps.newHashMap();
     private static Map<ResourceLocation, IIngredientFactory> ingredients = Maps.newHashMap();
-    private static Map<ResourceLocation, IRecipeFactory> recipes = Maps.newHashMap();
+    private static Map<ResourceLocation, IGenericRecipeFactory> recipes = Maps.newHashMap();
 
     static {
         init();
@@ -95,7 +95,7 @@ public class CraftingHelper {
             throw new IllegalStateException("Duplicate recipe condition factory: " + key);
         conditions.put(key, factory);
     }
-    public static void register(ResourceLocation key, IRecipeFactory factory)
+    public static void register(ResourceLocation key, IGenericRecipeFactory factory)
     {
         if (recipes.containsKey(key))
             throw new IllegalStateException("Duplicate recipe factory: " + key);
@@ -379,7 +379,7 @@ public class CraftingHelper {
         return factory.parse(context, json);
     }
 
-    public static IRecipe getRecipe(JsonObject json, JsonContext context)
+    public static void registerRecipe(JsonObject json, JsonContext context, ResourceLocation name)
     {
         if (json == null || json.isJsonNull())
             throw new JsonSyntaxException("Json cannot be null");
@@ -390,11 +390,11 @@ public class CraftingHelper {
         if (type.isEmpty())
             throw new JsonSyntaxException("Recipe type can not be an empty string");
 
-        IRecipeFactory factory = recipes.get(new ResourceLocation(type));
+        IGenericRecipeFactory factory = recipes.get(new ResourceLocation(type));
         if (factory == null)
             throw new JsonSyntaxException("Unknown recipe type: " + type);
 
-        return factory.parse(context, json);
+        factory.parseAndRegister(context, json, name);
     }
 
 
@@ -737,8 +737,7 @@ public class CraftingHelper {
                     JsonObject json = JsonUtils.func_193839_a(GSON, reader, JsonObject.class);
                     if (json.has("conditions") && !CraftingHelper.processConditions(json.getAsJsonArray("conditions"), ctx))
                         continue;
-                    IRecipe recipe = CraftingHelper.getRecipe(json, ctx);
-                    ForgeRegistries.RECIPES.register(recipe.setRegistryName(key));
+                    CraftingHelper.registerRecipe(json, ctx, key);
                 }
                 catch (JsonParseException e)
                 {

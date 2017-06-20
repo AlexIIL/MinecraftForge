@@ -19,9 +19,21 @@
 package net.minecraftforge.common.crafting;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 
-public interface IRecipeFactory {
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+@FunctionalInterface
+public interface IRecipeFactory extends IGenericRecipeFactory {
     public IRecipe parse(JsonContext context, JsonObject json);
+
+    @Override
+    public default void parseAndRegister(JsonContext context, JsonObject json, ResourceLocation name) throws JsonSyntaxException {
+        IRecipe recipe = parse(context, json);
+        recipe.setRegistryName(name);
+        ForgeRegistries.RECIPES.register(recipe);
+    }
 }
