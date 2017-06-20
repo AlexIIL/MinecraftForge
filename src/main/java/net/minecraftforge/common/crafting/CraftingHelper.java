@@ -557,7 +557,7 @@ public class CraftingHelper {
             {
                 ResourceLocation key = new ResourceLocation(context.getModId(), entry.getKey());
                 String clsName = JsonUtils.getString(entry.getValue(), "recipes[" + entry.getValue() + "]");
-                register(key, getClassInstance(clsName, IRecipeFactory.class));
+                register(key, getClassInstance(clsName, IGenericRecipeFactory.class));
             }
         }
 

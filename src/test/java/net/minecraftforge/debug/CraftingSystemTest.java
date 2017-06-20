@@ -1,10 +1,18 @@
 package net.minecraftforge.debug;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.JsonUtils;
+import net.minecraft.util.ResourceLocation;
+
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IConditionFactory;
+import net.minecraftforge.common.crafting.IGenericRecipeFactory;
 import net.minecraftforge.common.crafting.IIngredientFactory;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
@@ -53,6 +61,16 @@ public class CraftingSystemTest
         public BooleanSupplier parse(JsonContext context, JsonObject json)
         {
             return () -> true;
+        }
+    }
+
+    public static class FurnaceFactory implements IGenericRecipeFactory {
+
+        @Override
+        public void parseAndRegister(JsonContext context, JsonObject json, ResourceLocation name) throws JsonSyntaxException {
+            ItemStack input = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "input"), context);
+            ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
+            FurnaceRecipes.instance().addSmeltingRecipe(input, result, 0);
         }
     }
 }
