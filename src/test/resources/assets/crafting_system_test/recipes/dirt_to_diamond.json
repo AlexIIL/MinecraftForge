@@ -1,5 +1,5 @@
 {
-  "type": "furnace",
+  "type": "crafting_system_test:smelting",
   "input": {
     "item": "minecraft:dirt",
     "data": 0

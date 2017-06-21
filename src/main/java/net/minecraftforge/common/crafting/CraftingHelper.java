@@ -67,6 +67,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RecipeReloadEvent;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -597,6 +600,7 @@ public class CraftingHelper {
         //TODO: Figure out how to remove recipes, and override them. This relies on cpw to help.
         //For now this is only done one after mod init, I want to move this to ServerInit and re-do it many times.
         init();
+        MinecraftForge.EVENT_BUS.post(new RecipeReloadEvent.Pre());
         if (DEBUG_LOAD_MINECRAFT)
         {
             Iterator<IRecipe> itr = GameData.getRecipeRegistry().iterator();
@@ -611,6 +615,7 @@ public class CraftingHelper {
         Loader.instance().getActiveModList().forEach((mod) -> loadFactories(mod));
         Loader.instance().getActiveModList().forEach((mod) -> loadRecipes(mod));
         Loader.instance().setActiveModContainer(null);
+        MinecraftForge.EVENT_BUS.post(new RecipeReloadEvent.Post());
     }
 
     private static void loadFactories(ModContainer mod)

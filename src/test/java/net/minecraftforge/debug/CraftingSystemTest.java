@@ -16,6 +16,7 @@ import net.minecraftforge.common.crafting.IGenericRecipeFactory;
 import net.minecraftforge.common.crafting.IIngredientFactory;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
+import net.minecraftforge.event.RecipeReloadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
@@ -34,6 +35,19 @@ public class CraftingSystemTest
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
         FMLLog.info("Registering Test Recipes:");
+    }
+
+    @SubscribeEvent
+    public static void recipeReloadPre(RecipeReloadEvent.Pre event)
+    {
+        // Note that this isn't done properly:
+        // we also need to clear out any custom
+        // smelting recipes, but we don't have
+        // control over the maps.
+        // As such this isn't a good example
+        // and custom smelting recipes will need
+        // to be accomplished in a different way.
+        CraftingHelper.register(new ResourceLocation(MOD_ID, "smelting"), new FurnaceFactory());
     }
 
     public static class IngredientFactory implements IIngredientFactory
@@ -68,6 +82,7 @@ public class CraftingSystemTest
 
         @Override
         public void parseAndRegister(JsonContext context, JsonObject json, ResourceLocation name) throws JsonSyntaxException {
+            // While this does work, its not ideal
             ItemStack input = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "input"), context);
             ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
             FurnaceRecipes.instance().addSmeltingRecipe(input, result, 0);

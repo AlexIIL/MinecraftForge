@@ -3,8 +3,7 @@
     "nbt": "net.minecraftforge.debug.CraftingSystemTest$IngredientFactory"
   },
   "recipes": {
-    "free": "net.minecraftforge.debug.CraftingSystemTest$RecipeFactory",
-    "furnace":"net.minecraftforge.debug.CraftingSystemTest$FurnaceFactory"
+    "free": "net.minecraftforge.debug.CraftingSystemTest$RecipeFactory"
   },
   "conditions": {
     "true": "net.minecraftforge.debug.CraftingSystemTest$ConditionFactory"
