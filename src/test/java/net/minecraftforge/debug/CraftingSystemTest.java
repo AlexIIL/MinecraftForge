@@ -41,12 +41,9 @@ public class CraftingSystemTest
     public static void recipeReloadPre(RecipeReloadEvent.Pre event)
     {
         // Note that this isn't done properly:
-        // we also need to clear out any custom
-        // smelting recipes, but we don't have
-        // control over the maps.
-        // As such this isn't a good example
-        // and custom smelting recipes will need
-        // to be accomplished in a different way.
+        // we also need to clear out any custom smelting recipes, but we don't have
+        // control over the maps. As such this isn't a good example and custom
+    	// smelting recipes will need to be accomplished in a different way.
         CraftingHelper.register(new ResourceLocation(MOD_ID, "smelting"), new FurnaceFactory());
     }
 
@@ -83,6 +80,7 @@ public class CraftingSystemTest
         @Override
         public void parseAndRegister(JsonContext context, JsonObject json, ResourceLocation name) throws JsonSyntaxException {
             // While this does work, its not ideal
+        	// Note that this WILL break when recipes are reloaded multiple times.
             ItemStack input = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "input"), context);
             ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
             FurnaceRecipes.instance().addSmeltingRecipe(input, result, 0);
