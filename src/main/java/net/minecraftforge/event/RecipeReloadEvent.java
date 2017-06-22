@@ -37,16 +37,16 @@ public class RecipeReloadEvent extends Event
      * {@link IRecipeFactory}, and {@link IGenericRecipeFactory} with
      * {@link CraftingHelper} during this event. Additionally listeners should
      * clear recipe lists used by {@link IGenericRecipeFactory}, as then they
-     * can be repopulated from world data.
+     * can be re-populated from world data.
      */
     public static class Pre extends RecipeReloadEvent
     {
 
     }
 
-    /**
-     * Fired after all recipes have been loaded. Use this event for 
-     */
+	/**
+	 * Fired after all recipes have been loaded.
+	 */
     public static class Post extends RecipeReloadEvent
     {
 
